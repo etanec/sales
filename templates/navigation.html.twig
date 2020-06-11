@@ -1,0 +1,27 @@
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">{% if page_name is defined %}{{ page_name }}{% endif %}</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item {% if page_name is defined and page_name == 'Home' %}active{% endif %}">
+            <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+          </li>
+          <li class="nav-item {% if page_name is defined and page_name == 'New product' %}active{% endif %}">
+            <a class="nav-link" href="{{ path('new_product') }}">New Product {% if app.request.uri == path('new_product') %}<span class="sr-only">(current)</span>{% endif %}</a>
+          </li>
+          <li class="nav-item {% if page_name is defined and page_name == 'Sales' %}active{% endif %}">
+            <a class="nav-link" href="{{ path('sales') }}">Sales</a>
+          </li>
+        </ul>
+        <span class="navbar-text">
+          <a data-toggle="collapse" href="#collapseLogout" aria-expanded="false" aria-controls="collapseLogout">
+            {{ app.user.fullName }}
+          </a>
+        </span>
+      </div>
+    </nav>
+    <div class="collapse bg-light float-right navbar" id="collapseLogout">
+        <span class="navbar-text"><a class="" href="{{ path('app_logout') }}">Logout</a></span>
+    </div>

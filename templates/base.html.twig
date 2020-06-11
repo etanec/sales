@@ -5,35 +5,26 @@
         <title>{% block title %}{% if page_name is defined %}{{ page_name }}{% endif %}{% endblock %}</title>
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/styles/bootstrap.min.css') }}" />
+        <style>
+        #collapseLogout a {
+            color: rgba(0,0,0,.9);
+        }
+        </style>
         {% endblock %}
     </head>
     <body>
+        <div class="page-container">
         {% block body %}
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">{% if page_name is defined %}{{ page_name }}{% endif %}</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{{ path('homepage') }}">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('new_product') }}">New Product</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('sales') }}">Sales</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          {{ app.user.fullName }} <a href="{{ path('app_logout') }}">Logout</a>
-        </span>
-      </div>
-    </nav>
+        {% include "navigation.html.twig" %}
         {% endblock %}
+        </div>
         {% block javascripts %}
+        <script src="{{ asset('assets/scripts/jquery-3.4.1.slim.min.js') }}"></script>
+        <script src="{{ asset('assets/scripts/popper.min.js') }}"></script>
         <script src="{{ asset('assets/scripts/bootstrap.bundle.min.js') }}"></script>
+        <script>
+        $('.collapse').collapse('hide');
+        </script>
         {% endblock %}
     </body>
 </html>
