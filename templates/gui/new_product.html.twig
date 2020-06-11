@@ -2,4 +2,36 @@
 
 {% block body %}
 {{ parent() }}
+<div class="container-fluid">
+<div class="row">
+<div class="col-lg-4">
+<div id="flash_messages">
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+    {% if label == 'danger'%}
+        <div class="alert alert-{{ label }}" role="alert">
+            <span class="d-block">
+                <span class="form-error-icon badge badge-danger text-uppercase">{{ 'Error'|trans({}, 'validators') }}</span> <span class="form-error-message">{{ message }}</span>
+            </span>
+        </div>
+    {% else %}
+        <div class="alert alert-{{ label }}" role="alert">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ message }}
+        </div>
+    {% endif %}
+    {% endfor %}
+{% endfor %}
+</div>
+{{ form_start(form, {'attr': {'novalidate': 'novalidate', 'id': 'needs-validation'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.id) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.manager) }}
+    {{ form_row(form.salesStartDate) }}
+     <input class="btn btn-secondary" type="reset" value="Reset" />  <input type="submit" class="btn btn-primary" value = "{{ "Add product" }}" />
+{{ form_end(form) }}
+</div>
+</div>
+</div>
 {% endblock %}
