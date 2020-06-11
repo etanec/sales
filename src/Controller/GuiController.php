@@ -14,15 +14,37 @@ class GuiController extends AbstractController
     public function index(): Response
     {
         return $this->render('gui/index.html.twig', [
-            'controller_name' => 'GuiController',
+            'page_name' => 'Home'
         ]);
     }
 
     /**
      * @Route("/welcome", name="welcome")
      */
-    public function test(): Response
+    public function welcome(): Response
     {
-        return new Response('<html><body>Hello from welcome</body></html>');
+        return $this->render('gui/welcome.html.twig', [
+            'page_name' => 'Welcome'
+        ]);
+    }
+
+    /**
+     * @Route("/new-product", name="new_product")
+     */
+    public function newProduct(): Response
+    {
+        return $this->render('gui/new_product.html.twig', [
+            'page_name' => 'New product'
+        ]);
+    }
+
+    /**
+     * @Route("/sales", name="sales")
+     */
+    public function sales(): Response
+    {
+        return $this->render('gui/sales.html.twig', [
+            'page_name' => 'Sales'
+        ]);
     }
 }

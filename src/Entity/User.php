@@ -24,7 +24,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function geFullName(): string
+    public function getFullName(): string
     {
         return (string) $this->fullName;
     }
