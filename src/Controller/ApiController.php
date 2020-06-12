@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ApiController extends AbstractController
 {
     /**
-     * @Route("/api/product/add", name="api_add_product", methods={"POST"})
+     * @Route("/api/product", name="api_add_product", methods={"POST"})
      */
     public function addProduct(Request $request): JsonResponse
     {
@@ -26,5 +26,15 @@ class ApiController extends AbstractController
         }
 
         return new JsonResponse('Product created', 201);
+    }
+
+    /**
+     * @Route("/api/sales", name="api_get_sales", methods={"GET"})
+     */
+    public function getSales(string $_sales_files): JsonResponse
+    {
+        $data = \json_decode(\file_get_contents($_sales_files), true);
+
+        return new JsonResponse($data, 200);
     }
 }

@@ -15,7 +15,7 @@ class ProductManager
 
     public function addProduct(Product $product): bool
     {
-        $response = $this->client->post('/api/product/add', [
+        $response = $this->client->post('/api/product', [
             'id'=> $product->getId(),
             'name'=> $product->getName(),
             'manager'=> $product->getManager(),
