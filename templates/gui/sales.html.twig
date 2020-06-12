@@ -2,4 +2,73 @@
 
 {% block body %}
 {{ parent() }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="">
+            <table id="sales_table" class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th rowspan="2">{{ data.column[0].header }}</th>
+                    <th rowspan="2">{{ data.column[1].header }}</th>
+                    <th colspan="4">{{ data.column[2].header }}</th>
+                    <th rowspan="2">{{ data.column[3].header }}</th>
+                </tr>
+                <tr>
+                    <th>{{ data.column[2].subHeaders[0].header }}</th>
+                    <th>{{ data.column[2].subHeaders[1].header }}</th>
+                    <th>{{ data.column[2].subHeaders[2].header }}</th>
+                    <th>{{ data.column[2].subHeaders[3].header }}</th>
+                </tr>
+            </thead>
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script>
+const dataSet = {{ data.data|json_encode|raw }}
+$(document).ready(function() {
+    $('#sales_table').DataTable( {
+        data: dataSet,
+        order: [[ 0, 'asc' ]],
+        searching: false,
+        paging: false,
+        info: false,
+        columns: [
+            { data: "{{ data.column[0].field }}", orderable: true },
+            { data: "{{ data.column[1].field }}", orderable: true },
+            { data: "{{ data.column[2].subHeaders[0].field }}", orderable: true },
+            { data: "{{ data.column[2].subHeaders[1].field }}", orderable: true },
+            { data: "{{ data.column[2].subHeaders[2].field }}", orderable: true },
+            { data: "{{ data.column[2].subHeaders[3].field }}", orderable: true },
+            {
+                "data": null,
+                "searchable": false,
+                "orderable": false,
+                "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                    const content = oData.{{ data.column[2].subHeaders[0].field }} +
+                        oData.{{ data.column[2].subHeaders[1].field }} +
+                        oData.{{ data.column[2].subHeaders[2].field }} +
+                        oData.{{ data.column[2].subHeaders[3].field }}
+                    ;
+                    $(nTd).html(content);
+                }
+            },
+        ]
+    } );
+} );
+</script>
+{% endblock %}
+{% block styles %}
+{{ parent() }}
+<style>
+th {
+    border: 1px solid black !important;
+}
+table {
+    border-collapse: collapse !important;
+}
+</style>
 {% endblock %}

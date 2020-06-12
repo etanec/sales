@@ -5,6 +5,8 @@
         <title>{% block title %}{% if page_name is defined %}{{ page_name }}{% endif %}{% endblock %}</title>
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('assets/styles/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('assets/styles/datatables.min.css') }}" />
+        {% block styles %}{% endblock %}
         <style>
         #collapseLogout a {
             color: rgba(0,0,0,.9);
@@ -22,6 +24,7 @@
         <script src="{{ asset('assets/scripts/jquery-3.4.1.slim.min.js') }}"></script>
         <script src="{{ asset('assets/scripts/popper.min.js') }}"></script>
         <script src="{{ asset('assets/scripts/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('assets/scripts/jquery.dataTables.min.js') }}"></script>
         <script>
         $('.collapse').collapse('hide');
         </script>

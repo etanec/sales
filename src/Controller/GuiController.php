@@ -9,6 +9,7 @@ use App\Entity\Product;
 use App\Form\ProductType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Manager\ProductManager;
+use App\Manager\SalesManager;
 
 class GuiController extends AbstractController
 {
@@ -65,10 +66,13 @@ class GuiController extends AbstractController
     /**
      * @Route("/sales", name="sales")
      */
-    public function sales(): Response
+    public function sales(SalesManager $salesManager): Response
     {
+        $data = $salesManager->getSales();
+
         return $this->render('gui/sales.html.twig', [
-            'page_name' => 'Sales'
+            'page_name' => 'Sales',
+            'data' => \json_decode($data, true),
         ]);
     }
 }
