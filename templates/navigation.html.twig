@@ -5,9 +5,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item {% if page_name is defined and page_name == 'Home' %}active{% endif %}">
-            <a class="nav-link" href="{{ path('homepage') }}">Home</a>
-          </li>
           <li class="nav-item {% if page_name is defined and page_name == 'New product' %}active{% endif %}">
             <a class="nav-link" href="{{ path('new_product') }}">New Product {% if app.request.uri == path('new_product') %}<span class="sr-only">(current)</span>{% endif %}</a>
           </li>

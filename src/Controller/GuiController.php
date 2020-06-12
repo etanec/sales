@@ -10,17 +10,16 @@ use App\Form\ProductType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Manager\ProductManager;
 use App\Manager\SalesManager;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class GuiController extends AbstractController
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function index(): Response
+    public function index(): RedirectResponse
     {
-        return $this->render('gui/index.html.twig', [
-            'page_name' => 'Home'
-        ]);
+        return $this->redirectToRoute('welcome');
     }
 
     /**
