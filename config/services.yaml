@@ -4,13 +4,26 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    users:
+        malcolm:
+            full_name: Malcolm Fairclough
+            email: malcolm.fairclough@github.com
+            password: $argon2id$v=19$m=65536,t=4,p=1$6DDtu+kOZ5fr6P1nCDNUaA$QPUvXjhPxrx3xbb4b/Rv9eR/iGBGH7hPzsWhzc1wnOY
+            roles: ['ROLE_USER']
+        frederic:
+            full_name: Frédéric Dupont
+            email: frederic.dupont@github.com
+            password: $argon2id$v=19$m=65536,t=4,p=1$6DDtu+kOZ5fr6P1nCDNUaA$QPUvXjhPxrx3xbb4b/Rv9eR/iGBGH7hPzsWhzc1wnOY
+            roles: ['ROLE_USER']
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-
+        bind:
+            $_users: '%users%'
+            $_sales_files : '%kernel.project_dir%/data/potato_sales.json'
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
     App\:
